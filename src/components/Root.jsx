@@ -33,6 +33,8 @@ class Root extends Component {
                                     const Component = routes[path];
                                     if (path === pathMap) {
                                         return <Component key={pathMap} {...this.props} />
+                                    } else {
+                                        return <Route key={pathMap} component={Error} />
                                     }
                                 })}
                             </Switch>

@@ -10,6 +10,12 @@ const landingManager = (state = _defaultState, action) => {
     const { type = '', payload = {} } = action;
     try {
         switch (type) {
+            case Constants.actions.ERROR_HANDLER.DISPLAY_ERROR_MESSAGE: {
+                return {
+                    ...state,
+                    fetching: false,
+                };
+            }
             case Constants.actions.HOME.UPDATE_DATA: {
                 return {
                     ...state,

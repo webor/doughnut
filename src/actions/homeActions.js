@@ -1,4 +1,25 @@
 import Constants from 'constants';
+import { isEmpty } from 'lodash';
+
+export const emitGlobalError = (payload) => {
+    return {
+        type: Constants.actions.ERROR_HANDLER.DISPLAY_ERROR_MESSAGE,
+        payload: payload
+    };
+};
+
+export const removeGlobalError = (payload) => {
+        return async (dispatch, getState) => {
+            if (!isEmpty(getState().errorHandler.errors)) {
+                return {
+                    type: Constants.actions.ERROR_HANDLER.HIDE_ERROR_MESSAGE,
+                    payload: payload
+                };
+            }
+
+        }
+    };
+
 
 export const deleteRow = ( payload = {} ) => {
     const { id = '' } = payload;
@@ -54,7 +75,11 @@ export const getApiData = (payload = {}) => {
             method: Constants.apiConfig.listingApi.method,
             headers: Constants.apiConfig.listingApi.headers
         } ).then((response) => {
-            return response.json();
+            if (response.ok) {
+                return response.json();
+              } else {
+                throw new Error('Something went wrong');
+              }
           })
           .then((response ) => {
               console.log( JSON.stringify( response ) );
@@ -62,7 +87,9 @@ export const getApiData = (payload = {}) => {
                 type: Constants.actions.HOME.GET_API_DATA,
                 payload: response
             });
-          });  
+          }).catch( ( err ) => {
+              dispatch( emitGlobalError(err) );
+          } );  
     }
 };
 
@@ -74,7 +101,11 @@ export const postApiData = (payload = {}) => {
             headers: Constants.apiConfig.postListingApi.headers,
             body: JSON.stringify( getState().landingManager.list )
         } ).then((response) => {
-            return response.json();
+            if (response.ok) {
+                return response.json();
+              } else {
+                throw new Error('Something went wrong');
+              }
           })
           .then((response ) => {
               console.log( JSON.stringify( response ) );
@@ -82,7 +113,9 @@ export const postApiData = (payload = {}) => {
                 type: Constants.actions.HOME.GET_API_DATA,
                 payload: response
             });
-          });  
+          }).catch( ( err ) => {
+            dispatch( emitGlobalError(err) );
+        } );  
     }
 };
 
