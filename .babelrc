@@ -1,0 +1,45 @@
+{
+    "presets": [
+      [
+        "@babel/preset-env",
+        {
+          "targets": {
+            "browsers": [
+              "last 2 versions"
+            ]
+          },
+          "corejs": "2",
+          "modules": false,
+          "debug": false,
+          "useBuiltIns": "usage"
+        }
+      ],
+      [
+        "@babel/preset-react",
+        {
+          "pragma": "dom",
+          "pragmaFrag": "DomFrag",
+          "throwIfNamespace": false
+        }
+      ]
+    ],
+    "plugins": [
+      "@babel/plugin-transform-runtime",
+      "@babel/plugin-proposal-class-properties",
+      "@babel/plugin-transform-react-jsx",
+      "@babel/plugin-proposal-throw-expressions",
+      "@babel/plugin-syntax-dynamic-import",
+      [
+        "@babel/plugin-proposal-pipeline-operator",
+        {
+          "proposal": "smart"
+        }
+      ],
+      [
+        "react-hot-loader/babel",
+        {
+          "safetyNet": false
+        }
+      ]
+    ]
+  }
