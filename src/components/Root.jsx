@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import React, { Component, Suspense } from 'react';
 import { connect } from "react-redux";
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import EmptyLoader from '../views/preloader';
 import ErrorBoundary from './ErrorBoundary';
 
 class Root extends Component {
@@ -26,7 +25,7 @@ class Root extends Component {
         return (
             <div className="wrapper">
             <ErrorBoundary>
-                    <Suspense fallback={<EmptyLoader />}>
+                    <Suspense fallback={<div> Please wait while loading... </div>}>
                         <Router>
                             <Switch>
                                 {paths.map((pathMap, i) => {
