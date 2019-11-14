@@ -6,7 +6,9 @@ Head over to terminal to the location where app is downloaded
 and hit
 
 npm i
+
 npm start
+
 npm run dev-server
 
 head over to browser and type localhost:8000/home
